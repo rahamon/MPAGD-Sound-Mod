@@ -1,0 +1,26 @@
+Program convert input file into CODE block in .tap file. Program can create simple BASIC loader too. Program syntax is as follow:
+
+bin2tap [options] input_file
+All options are optional except input file name. If some option is requied and not set, it's used default value. Options are:
+
+-a address             start address of CODE block, default value is 32768
+-o output_file         assign output .tap file. If this switch is not set,
+                       program try to replace extension of input file
+                       (extension is search in last 4 characters) by .tap
+                       extension. If he's not successfull, join extension
+                       after name of input file.
+
+-b                     this switch include BASIC loader in output file
+-c clear_address       set address in CLEAR command in loader, default value
+                       is 24575
+-r run_address         set run address in loader (RANDOMIZE USR), defaul value
+                       is 32768
+-cb value              set BORDER colour to value, default value is 0
+-cp value              set PAPER colour to value, default value is 0
+-ci value              set INK colour to value, default value is 7
+-d80                   create D80 loader, name of BASIC loader is set to "run"
+-append                append created tap at end of file
+-hp | --header-poke    include POKE 23739,111 command for dissabling tape headers
+
+-h  | --help           print usage information
+-v  | --version        print program version

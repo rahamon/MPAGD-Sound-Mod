@@ -1,0 +1,11 @@
+       ld d,a
+       ld h,41
+       call imul
+       ld de,fx1
+       add hl,de	; hl = 41*a + fx1
+       call isnd
+	   
+	   ld hl,fx1
+       ld de,3936
+       add hl,de	; hl = fx1 + 41*n
+       call isnd

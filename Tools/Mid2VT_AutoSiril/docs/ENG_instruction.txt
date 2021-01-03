@@ -1,0 +1,107 @@
+AutoSiril Midi To VT converter
+
+By Siril (Sept 2012 ZX.PK.RU)
+
+autosiril standalone MIDI 2 PT3 (VTi) 
+ Bring to your attention an unofficial, unsupported, supplied "as is", "at your own risk" standalone version autosiril (currently only for windows): conversion utility and downmix midi-modules modules vortex tracker. 
+ Instructions and examples of use - inside, the catalog autosiril, Vortex Tracker Improved (by me) - is included in the archive. 
+ If you have any questions about using - ask (but only after reading the manual).  If you have time - I will answer and explain =) 
+
+ Link: https://dl.dropbox.com/u/969122/autosiril_v1.zip 
+
+---------- Post added at 16:17 ---------- Previous post was at 16:16 ---------- 
+
+
+
+ Brief instructions for the converter parameters: 
+
+auto siril K01.exe <file.mid> <channel1>, <channel2>, <channel3> N1 N2 N3 N4 N5 N6 N7 
+
+ For example: 
+
+auto siril K01.exe imrav.mid 2me [2f]-6p [3] +, 3m [1e]-7m [6d]-6p [3] +-2mew +, 4m [3c]-5m [2b] +-2me + 8 6 12 0 64 2 24 
+
+auto siril K01.exe - the name of the executable file 
+<File.mid> - path to the MIDI-file format SMF1 
+<Channel1>, <channel2>, <channel3> - downmix options MIDI tracks into channels 1,2,3 editor VortexTracker Improved.  (See below) 
+N1 - lines per quarter note (beat) (default 4, with a bar in the editor VTi will fall 4 * 4 = 16 stitches and 64 rows of the pattern will contain 4 measures) 
+N2 - shift in the lines for the primary echo (default 3) 
+N3 - shift in the lines of the secondary echo (default 6) 
+N4 - shift in the lines before the information notes (default 0) - used when the early midi track there is a pause 
+N5 - the size of the pattern in the lines (default is 64, maximum - 255) 
+N6 - positions ornament on one note chord (usually 1 or 2, when you convert a chord in every note chord pattern will match the specified number of positions of the ornament) 
+N7 - the number of half-tones of the mid chord, which characterizes the "width" chord, which will be taken for analysis and transformation in the pattern.  if the number of ornaments in the module to convert more than 15 - it makes sense to reduce this parameter, or by hand to optimize the chords in the original midi track. 
+
+<ChannelN> - Setting downmix MIDI tracks into channels VortexTracker Improved. 
+ Lists the MIDI tracks, their type, priority blending, mixing properties. 
+ If one channel is mixed more than one track, they are separated by "-": 
+ 1m-2m 
+ priority decreases from left to right (on the left - the highest priority track), the example 1m-2m - Track 1 Track 2 override. 
+
+Types of tracks: 
+ d - (Drums) - drums. 
+ m - (Mono melody) - melody (monophonic) - chords on track with this type will be converted to a single note (the highest note of the chord) 
+ p - (Polyphonic melody) - Harmony (polyphony) - chords on track with this type will be converted into ornaments. 
+ Type of track is indicated after its number: "1m" or "2p" or "4d". 
+Subtype track: 
+ e - (Envelope) - combined with a track like "m", indicated after the type used primarily for bass notes will be converted using the envelope: "1me". 
+Modifiers properties tracks: 
+ u - (mUte echo) - to echo the track will not be generated 
+ w - (double echo) - Echo will be 2 times longer (see these options N2 and N3). 
+ Modifier is specified after the type of track: 
+ 1du - a shock will not echo. 
+ 2mew - a double envelope will echo. 
+ 3pw - a harmony (chords, transformed into ornaments) will be twice the echo. 
+Blending option: 
+ + - (Plus) - option is specified after the modifier track, points out that if the current position in the module VTi already taken note of the previous (left higher priority track) is a note of the current track skipped. 
+ by default (without "+") if the current position in the module VTi already taken note of the previous (left higher priority track) is a note of the current track will be inserted in the following line (that is, sounds a little later.) 
+ Example: 1d-2me-6p + 
+ Udanik of track 1 (1d) will be installed in the first place, if the track 2 (2me) is the bass, it will be set lower then the last step is to try to establish a chord from track 6 (6p +), but if the previous track had at least one note, the chord is skipped. 
+
+Options specific assignment samples and ornaments miscible tracks: 
+ [SO] - (Sample Ornament).  After modifying the properties of the track can be made of the track assignment for a certain issue, or a sample from the sample designs: 2me [2f]-6p [3] + 
+ note of track 2 will be supplied with an envelope, a second sample, with ornament "F" (15), and a note of track 6, will be delivered to the sample 3 (as it "polyphonic" track patterns which are assigned automatically, manually assign ornament - ignored ). 
+
+ To test the converter, you can run the attached. Bat files: 
+ do_flim.bat 
+ do_imrav_hard.bat 
+ do_imrav_medium.bat 
+ do_imrav_simple.bat 
+ which converts the attached. mid modules with different settings to a text file VortexTracker Improved. 
+VortexTracker Improved (VortexTracker improved by oisee / siril ^ 4d) - is located in the appropriate folder.  (The latest version can be found on the forum zx.pk.ru).
+
+General recommendations for converting midi to VTi: 
+
+ highest priority track in the channel select percussion or bass. 
+ often for drummers can disable echo and the sound will be better.  "1du" 
+ Bass fun with the option to convert "e" (envelope).  "2me" 
+ feel free to convert with the "e" tracks on different channels at the same time - conflicts on the envelope are automatically resolved. 
+ often drums and bass can be zamiksovany in one channel, bass drums override.  "1du-2me" 
+ often on the same channel can be squeezed and harmony (chords, the track with the option "p").  "1du-2me-3p" 
+ If MIDI track has about 125 BPM, then the first three numeric parameters (N1, N2, N3) are 4 3 6 4 6 12 or. 
+ If BPM is below or above - it makes sense to try 8 6 12 or 8 12 24 and put the rate 3 (VortexTracker'e). 
+ if the size is not 4/4 and 3/4, or MIDI-track uses syncopation clearly marked, try to give a quarter note 12 lines.  that is, the first three parameters, or 6 0 0 12 0 0 (the echo - then surely there). 
+ for MIDI modules that use a 3/4 makes sense to set the length of the pattern (N5) - 48 or 96 lines. 
+ if it is not loaded in the VTi - maybe you got too many patterns or ornaments (more than 15), check the input data, reduce the "width" of chords to more chords matched and transformed into the same patterns.  or optimize the chords in a sequencer.  or remove the "extra" patterns from the text of the module - the module is loaded, but the chords on the ornaments will need to check and listen to their correctness manually VTi. 
+ __________________
+ 
+ YET TO DO:
+ have a general idea that it would be nice to do: 
+
+ 1) GUI-frontend for viewing MIDI tracks and a simple mapping of the channels AY (anyone can do it yourself =). 
+ 2) additional conversion option tracks (transpose, etc.) 
+ 3) types of manual midi-mapping drummers on samples VortexTracker. 
+ 4) conversion of pitch to slide VTi.
+ 
+ Ideally, a GUI might do the following:
+ 
+ Load the midi-file, look what his tracks, draw events (notes) of each track in the respective region.  (To make it like a sequencer). 
+
+ Assign each track properties (Bass, Drum, Poly, Melody). 
+
+ Graphically indicate for each channel VTi which tracks it will go and with what options. 
+ Set global parameters (lines per quarter note lines to echo the pattern and size, etc. 
+ At the output, we have a simple console command to run avtosirila, which set the path to the original midi file.  This command can be immediately and run.  That is, this GUI is not necessarily any conversion midi file to perform but his view and more or less similar to the sequencer display. 
+
+ As an additional bonus of a nice GUI-shell - to listen to the original midi track with individual channels on or off (in order to better define the contents of the track - to which it belongs: bass, drum, poly, melody).  That's it.
+ 

@@ -1,0 +1,28 @@
+Credits to:
+
+Big thanks to Allan Turvey for his constant pestering to make me motivated
+
+Mat Recardo for bug testing
+
+Jonathan Cauldwell for AGD
+http://arcadegamedesigner.proboards.com/
+
+Sergey Bulba for VortexTracker II play routine
+http://bulba.untergrund.net/vortex_e.htm
+
+Einar Saukas for ZX7
+http://www.worldofspectrum.org/infoseekid.cgi?id=0027996
+
+All the music authors
+http://zxart.ee/eng/music/
+
+Julian Albo for Pasmo 
+http://pasmo.speccy.org/
+
+Music artists in the examples :
+
+CJ ECHO
+KENOTRON
+Karbofos
+MAST
+KenoTron

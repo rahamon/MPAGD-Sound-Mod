@@ -1,0 +1,9 @@
+El editor FX lista los efectos desde 0, AGD hace beep desde 1.
+Por lo tanto nuestro beep 1 corresponde el efecto 0 en el editor FX.
+
+Las canciones:
+- generar con beepola, con su MusicBox engine, y solo asm data
+- prepararlas renombrar PAT con nombredecancoin_PAT (quedará PATTERNDATA con nombredecancoin_PATTERNDATA)
+			MUSICDATA con nombredecancoin_MUSICDATA
+- borrar la primera línea que contiene org xxxxx
+			
