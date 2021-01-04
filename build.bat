@@ -79,6 +79,7 @@ rem actualizar fuentes
 			cd ..\..\MAGDmusicizer
 			tools\zx7 screen.scr
 			AGDmusicizerII /nc
+			echo Joining tape data       : Ignored by MPAGD-Sound Mod, all is OK.
 			tools\fart --remove asm\music.asm "..\bin\\"
 			xcopy /I /C /Y /q  bin\*.zx7 asm
 			copy tools\vt49152.bin.zx7 asm
