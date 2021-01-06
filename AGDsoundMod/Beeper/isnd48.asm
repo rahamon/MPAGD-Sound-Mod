@@ -29,9 +29,11 @@ chkst	defb 0
 ctrN	defb 0				; SOUND CONTROL
 ctrF	defb 0				; FX CONTROL
 		
-; rutina de calculo: obiene c = (DE/41)-1		
+; CALCULO: c = (HL-fx1)/41	
 div41
-		push de				; de = 41*n
+		ld de,fx1
+		sbc hl,de
+		push hl
 		pop bc				; bc Dividendo
 		ld de,41 			; de Divisor
 		ld hl,0
