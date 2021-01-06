@@ -15,6 +15,10 @@ esmusica
 		cp 36
 		jp z,monitor
 		ld (ctrN),a			; guardamos control en ctrN
+		push ix
+		ld b,1
+		call delay
+		pop ix
 		ret
 noesmusica
 esefecto
