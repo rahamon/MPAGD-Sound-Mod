@@ -112,7 +112,6 @@ ISR 	; ISR pre:
 		; checkloop
 		DEFB $3E            	; LD A,n
 LoopTun	defb 0
-		ld (varv),a
 		cp 1
 		jr z,skipchekend
 		; check final de musica
