@@ -70,7 +70,7 @@ isnd
 		include "isnd.asm"
 		; check loop command
 AY
-		cp 0					; n = 0? -> commando: deshabilita loop (loop activado por defecto)
+		and a					; n = 0? -> commando: deshabilita loop (loop activado por defecto)
 		jp z,SetLoopOFF
 		; Seleccion Musica:
 		call bank4
@@ -78,7 +78,9 @@ AY
         ld hl,(dir_MUSICDATA)
 		dec a
         call comando_Init		; INIT
+		call ResetEndofthesongflag
 		call bank0
+		; reset LoopTunflag
 		ld a,1
 		ld (LoopTun),a			; LoopTun = 1 (por defecto)
 		ret
@@ -110,6 +112,7 @@ ISR 	; ISR pre:
 		; checkloop
 		DEFB $3E            	; LD A,n
 LoopTun	defb 0
+		ld (varv),a
 		cp 1
 		jr z,skipchekend
 		; check final de musica
@@ -140,19 +143,14 @@ skipplay
 		reti
 		;jp 56					; set for use in basic 
 
-crtN	defb 0
 
 silenc
 silenceSound
-
 		call bank4
 		call comando_STOP		; STOP
 		; musica silencio
 		call InitEmptySong
-		; reset Endofthesong flag en Arkosplayer
-		xor a
-		ld hl,(dir_EndofthesongAddr)
-		ld (hl),a
+		call ResetEndofthesongflag
 		call bank0
 		ret
 
@@ -168,19 +166,18 @@ InitEmptySong
 		ld a,1
 		ld (LoopTun),a			; LoopTun = 1 (por defecto)
 		ret
-		
-InitMusic
-        ;Initializes the music.
-		call bank4
-        ld hl,(dir_MUSICDATA)
-        xor a                   ; Subsong 0.
-        call comando_Init		; INIT
-		call bank0
+
+ResetEndofthesongflag
+		; reset Endofthesongflag
+		xor a
+		ld hl,(dir_EndofthesongAddr)
+		ld (hl),a
 		ret
 
 InitPLayer
 		call bank4
 		call InitEmptySong
+		call ResetEndofthesongflag
 		call bank0
 		ret
 				
