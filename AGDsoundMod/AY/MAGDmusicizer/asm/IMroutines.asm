@@ -36,6 +36,7 @@ ISR:
 		jp z,skipplay			; go to skip play 
 		include "irinclude.asm"	
 		; check LOOP
+		ld a,(ctrN)				; load a with ctrN
 		and a
 		jp z,loopOFF 			; check: ctrN = 0 -> command LoopOff: play una sola vez.
 		cp 31					; clave 31
