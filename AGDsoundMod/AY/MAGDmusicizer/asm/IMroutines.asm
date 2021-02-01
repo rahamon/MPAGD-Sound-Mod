@@ -70,10 +70,7 @@ contplay:
 		; check loopFlag
 		and a				
 		jr z,skipStop			; loopFlag = 0 -> loopON, continua.
-		; Reset VTPlayerLoopFlag and Stop (end of song).
-		ld a,0
-		ld (49152+10),a			; reset LoopFlag
-		call bank0
+		; Stop (end of song).
 		jp muteplay				; Stop 
 		
 skipStop		
