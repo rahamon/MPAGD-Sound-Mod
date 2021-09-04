@@ -9,9 +9,10 @@
 ; irincludes.asm
 ; localizadas en ... Drivers\AYMusic128k\
 
-			org 32000
+			org 24832
 
 MUSICSTART 	equ 51310
+FX4BANK		equ 61440
 tBank		equ		4
 
 			include "musicsizes.asm"
@@ -30,12 +31,19 @@ InstallBank4:
 			ld hl,screeninc
 			ld de,$4000
 			call zx7bin
-			
+					
 			; extract music player to 49152
 			; bank 4
 			call bank4
 			ld hl,ayplaybin
 			ld de,49152
+			call zx7bin
+			
+			; extract Fx player and effects to 61440
+			; bank 4
+			call bank4
+			ld hl,fx4bankbin
+			ld de,61440
 			call zx7bin
 			
 			; extract all musics
@@ -53,11 +61,14 @@ exit:
 			include 	"routines.asm"
 			include		"zx7.asm"
 			include 	"music.asm"
-			defs 4
+			defs 4,0
 ayplaybin: 	; vtII playroutine Sergio Bulba
 			incbin "vt49152.bin.zx7"
 			defs 4,0
-screeninc:
+fx4bankbin:	; AYFxPlayer and effects
+			incbin "FX4BANK.bin.zx7"
+			defs 4,0
+screeninc:	; presentación pantalla.
 			incbin "screen.scr.zx7"
 			defs 4,0
 			

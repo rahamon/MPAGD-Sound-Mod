@@ -1,12 +1,12 @@
 ; ---------------------------------------------------------------------
 ;	IMsubroutines
-;	Set LoopOff with USER 0
-;	Set SOUND to the music you want to play eg USER 1 - 29.
+;	Set LoopOff with SOUND 0
+;	Set SOUND to the music you want to play eg SOUND 1 - 29.
 ;	When the music starts control will then be set to 30!! This means music is playing
-;	To stop and mute the music set USER 31
-;	To halt (SKIP) playback USER 32 (note this does not mute the AY chip)
-;   Monitor con USER 36
-;   Fx con USER > 100
+;	To stop and mute the music set SOUND 31
+;	To halt (SKIP) playback SOUND 32 (note this does not mute the AY chip)
+;   Monitor con SOUND 36
+;   Fx con SOUND > 100
 ; ---------------------------------------------------------------------
 	
 ; interrupt routine itself 
@@ -83,9 +83,9 @@ skipplay:
 		ld a,(ctrF)			; sound to play.
 		and a          	    	; any new sound?
 		jr z,plfx				; no.
-		ld c,a
-		dec c
+		
 		call Selectfx			; iniciamos banco
+		
 		ld a,1
 		ld (isOkfx),a
 		xor a
@@ -93,8 +93,13 @@ skipplay:
 plfx		
 		DEFB $3E        	    ; LD A,n
 isOkfx	defb 0
-		cp 1
-		call z,AFXFRAME			; efectos de juego
+		;cp 1
+		cp 0
+		jp z,endfx
+		
+		call bank4
+		call FX4BANK + 8		; efectos de juego
+endfx	call bank0
 
 		pop af 
 		ex af, af' ;'
