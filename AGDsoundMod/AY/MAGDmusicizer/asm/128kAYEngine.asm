@@ -2,6 +2,7 @@
 ; MUSIC AND SOUNDS
 
 MUSICSTART 	equ 51310
+FX4BANK		equ 61440
 tBank		equ	4
 AGame		equ start
 IJUMP		equ IJUMPA+$FF
@@ -39,11 +40,15 @@ initPlayer:
 			
 			ld a,31					; no music on launch. EmptySong
 			ld (ctrN),a
-			; setup
+			
+			; MUSIC setup
 			call bank4
 			call 49152				; init VT player
 			call bank0
-			call FXsetups
+			
+			;FX setup
+			call FXsetup
+			
 			jp gameloop
 			
 msetup:								; mover a AY.asm
