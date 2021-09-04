@@ -7,7 +7,6 @@
 ; musicplayback.asm
 ; musicdepacks.asm 
 ; irincludes.asm
-; localizadas en ... Drivers\AYMusic128k\
 
 			org 24832
 
