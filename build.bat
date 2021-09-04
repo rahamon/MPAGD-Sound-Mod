@@ -4,18 +4,18 @@ rem ------------------------------------------------------
 rem MODO
 rem 0 = Standard MPAG
 rem 1 = Modificacion cargador para Pac-man compatible
-set mod=1
+set mod=0
 rem ------------------------------------------------------
 rem Modificaciones de cargador:
 rem nombre para tu juego
-set gamename=Pacman
+set gamename=pacman
 rem ------------------------------------------------------
 rem Modificaciones de sonido
 rem 0 = Standard
 rem 1 = ZX Spectrum 48k Beeper
 rem 2 = ZX Spectrum 128/+2/+3 AY-3-8912 Musicizer
 rem 3 = ZX Spectrum 128/+2/+3 AY-3-8912 Arkos Traker
-set modsnd=3
+set modsnd=2
 rem ------------------------------------------------------
 
 rem empacaje standard
@@ -24,7 +24,7 @@ if %mod% == 0 (
 		rem Compile AGD file
 			copy AGDsource\%1.agd AGD
 			cd AGD
-			CompilerZX %1
+			CompilerZX %1 -A
 		rem Assemble game
 			copy %1.asm ..\sjasmplus\
 			copy ..\..\user.asm ..\sjasmplus\
@@ -51,13 +51,13 @@ rem compile
 		rem Compile AGD file
 			copy AGDsource\%1.agd AGD
 			cd AGD
-			CompilerZX %1
+			CompilerZX %1 -a
 	) else (
 		rem Compilar AGD file Modificado
 			echo Sound Mod build ....
 			copy AGDsource\%1.agd AGDsoundMod
 			cd AGDsoundMod
-			..\AGD\CompilerZX %1
+			..\AGD\CompilerZX %1 -a
 	)
 rem actualizar assemble game
 	copy %1.asm ..\assembly\
@@ -141,6 +141,8 @@ rem modificaciones de código
 	)
 rem empacaje
 	if %modsnd% == 2 (
+		..\tools\rasm FX4BANK.asm -o FX4BANK
+		..\tools\zx7 FX4BANK.bin
 		..\tools\Pasmo.exe --tap --name MUD bank4driver.asm MUD.tap
 	)
 	if %modsnd% == 3 (
