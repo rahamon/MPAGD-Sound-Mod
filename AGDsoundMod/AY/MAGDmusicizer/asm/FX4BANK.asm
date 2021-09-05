@@ -1,5 +1,5 @@
 
-		org 61440
+		org 61440 + 1024
 
 	FX4BANK_FXBANK		defw ayfxBankAd		; org + 0 Dirección de Banco de effectos
 
