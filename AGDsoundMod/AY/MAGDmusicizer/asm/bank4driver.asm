@@ -42,7 +42,7 @@ InstallBank4:
 			; bank 4
 			call bank4
 			ld hl,fx4bankbin
-			ld de,61440
+			ld de,FX4BANK
 			call zx7bin
 			
 			; extract all musics
