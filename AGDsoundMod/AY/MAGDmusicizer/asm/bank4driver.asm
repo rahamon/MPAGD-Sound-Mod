@@ -11,7 +11,7 @@
 			org 24832
 
 MUSICSTART 	equ 51310
-FX4BANK		equ 61440
+FX4BANK		equ 61440 + 1024
 tBank		equ		4
 
 			include "musicsizes.asm"
