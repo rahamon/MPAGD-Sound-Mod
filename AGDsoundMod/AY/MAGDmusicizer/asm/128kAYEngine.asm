@@ -2,7 +2,7 @@
 ; MUSIC AND SOUNDS
 
 MUSICSTART 	equ 51310
-FX4BANK		equ 61440
+FX4BANK		equ 61440 + 1024
 tBank		equ	4
 AGame		equ start
 IJUMP		equ IJUMPA+$FF
