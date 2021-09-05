@@ -8,7 +8,7 @@
 ; musicdepacks.asm 
 ; irincludes.asm
 
-			org 24832
+			org 32000
 
 MUSICSTART 	equ 51310
 FX4BANK		equ 61440 + 1024
