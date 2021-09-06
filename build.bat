@@ -24,7 +24,7 @@ if %mod% == 0 (
 		rem Compile AGD file
 			copy AGDsource\%1.agd AGD
 			cd AGD
-			CompilerZX %1 -A
+			CompilerZX %1
 		rem Assemble game
 			copy %1.asm ..\sjasmplus\
 			copy ..\..\user.asm ..\sjasmplus\
@@ -51,13 +51,13 @@ rem compile
 		rem Compile AGD file
 			copy AGDsource\%1.agd AGD
 			cd AGD
-			CompilerZX %1 -a
+			CompilerZX %1
 	) else (
 		rem Compilar AGD file Modificado
 			echo Sound Mod build ....
 			copy AGDsource\%1.agd AGDsoundMod
 			cd AGDsoundMod
-			..\AGD\CompilerZX %1 -a
+			..\AGD\CompilerZX %1
 	)
 rem actualizar assemble game
 	copy %1.asm ..\assembly\
