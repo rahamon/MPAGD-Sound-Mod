@@ -42,8 +42,7 @@ isOkinitSetup
 			
 			; MUSIC setup
 			call msetup
-			ld a,31					; clave NO MUSIC on launch. EmptySong
-			ld (ctrN),a
+			call silenc
 			
 			;FX setup
 			call FXsetup
