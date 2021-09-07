@@ -39,7 +39,7 @@ ISR:
 		jp skipplay
 		
 loopOFF
-		ld a,10					; command new check ciclo+
+		ld a,10					; clave new check ciclo+
 		ld (ctrN),a
 		call bank4	
         ld a,1
@@ -47,15 +47,15 @@ loopOFF
 		jp skipplay
 
 muteplay:
-		ld a,32					; command skipplay
+		ld a,32					; clave skipplay
 		ld (ctrN),a
 		call bank4
-		call 49152				; mute audio 
+		call 49152				; MUTE audio 
 		jp skipplay
 		
 contplay:
 		call bank4	
-		call 49157       		; play the current tune
+		call 49157       		; PLAY the current tune
 		; check end of song
 		ld a,(49152+10)
 		rla
@@ -77,7 +77,7 @@ skipplay:
 		and a          	    	; any new sound?
 		jr z,plfx				; no.
 		
-		call Selectfx			; iniciamos banco
+		call Selectfx			; SELECT FX from banck
 		
 		ld a,1
 		ld (isOkfx),a
@@ -91,7 +91,7 @@ isOkfx	defb 0
 		jp z,endfx
 		
 		call bank4
-		call FX4BANK + 8		; efectos de juego
+		call FX4BANK + 8		; PLAY efectos de juego
 endfx	call bank0
 
 		pop af 
@@ -110,23 +110,19 @@ endfx	call bank0
 		ENDIF 
 
 IMStart:
-		;ld hl,ISR 
-		;ld (IJUMP),hl			; poke ISR address to the ijunp
 		di
-		;call bank4	
 		ld a, IJUMP/256
 		ld i, a
 		im 2
-		call bank0
 		ei
 		ret       
 IMOff:
 		di
 		im 1
 		call bank4
-		call 49152				; mute
+		call 49152				; MUTE
 		call bank0
-		ld a,20					; command new check ciclo+
+		ld a,20					; clave new check ciclo+
 		ld (ctrN),a	
 		ei
 		ret
