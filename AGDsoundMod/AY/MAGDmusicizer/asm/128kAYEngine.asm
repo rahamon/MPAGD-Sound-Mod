@@ -22,6 +22,13 @@ salirABasicScore:
 			ret						; salir
 
 initPlayer:
+initSetup:	
+			DEFB $3E        	    ; LD A,n
+isOkinitSetup
+			defb 0
+			cp 1
+			jp z,endinitSetup
+
 			di
 			; write ISR address to the ijunp in RAM
 			call bank0
@@ -44,6 +51,11 @@ initPlayer:
 			;FX setup
 			call FXsetup
 			
+			jp gameloop
+			
+			ld a,1
+			ld (isOkinitSetup),a		; todo está bien			
+endinitSetup
 			jp gameloop
 			
 msetup:
