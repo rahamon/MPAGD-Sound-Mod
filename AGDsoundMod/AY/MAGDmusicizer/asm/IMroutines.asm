@@ -78,15 +78,12 @@ skipplay:
 		jr z,plfx				; no.
 		
 		call Selectfx			; SELECT FX from banck
-		
-		ld a,1
-		ld (isOkfx),a
+
 		xor a
 		ld (ctrF),a			; new ready.
 plfx		
 		DEFB $3E        	    ; LD A,n
 isOkfx	defb 0
-		;cp 1
 		cp 0
 		jp z,endfx
 		
