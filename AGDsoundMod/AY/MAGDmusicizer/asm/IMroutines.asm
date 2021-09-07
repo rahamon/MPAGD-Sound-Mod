@@ -118,11 +118,6 @@ IMStart:
 		ret       
 IMOff:
 		di
-		im 1
-		call bank4
-		call 49152				; MUTE
-		call bank0
-		ld a,20					; clave new check ciclo+
-		ld (ctrN),a	
+		im 1	
 		ei
 		ret
