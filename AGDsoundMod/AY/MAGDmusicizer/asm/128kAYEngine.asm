@@ -40,11 +40,10 @@ isOkinitSetup
 			ld hl,ISR 
 			ld (IJUMP),hl 
 			
-			ld a,31					; clave NO MUSIC on launch. EmptySong
-			ld (ctrN),a
-			
 			; MUSIC setup
 			call msetup
+			ld a,31					; clave NO MUSIC on launch. EmptySong
+			ld (ctrN),a
 			
 			;FX setup
 			call FXsetup
