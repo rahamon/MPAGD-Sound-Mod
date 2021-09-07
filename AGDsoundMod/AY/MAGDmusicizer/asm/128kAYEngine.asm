@@ -47,8 +47,6 @@ isOkinitSetup
 			;FX setup
 			call FXsetup
 			
-			jp gameloop
-			
 			ld a,1
 			ld (isOkinitSetup),a		; todo está bien			
 endinitSetup
