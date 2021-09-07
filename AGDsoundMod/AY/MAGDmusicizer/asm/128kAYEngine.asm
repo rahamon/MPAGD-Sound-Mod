@@ -47,7 +47,7 @@ isOkinitSetup
 			call msetup
 			;call bank4
 			;call 49152				; INIT VT player
-			;call bank0
+			call bank0
 			
 			;FX setup
 			call FXsetup
