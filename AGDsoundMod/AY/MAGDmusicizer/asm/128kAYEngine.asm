@@ -52,7 +52,6 @@ msetup:
 			ld (ctrN),a
 			call bank4
 			push hl 
-			;call 49152
 			call 49152+8			; MUTE	
 			pop hl 
 			call 49155			; POINTING TO Module
