@@ -34,6 +34,9 @@ FXsetup						; inicializacion de drivers
 		ld hl,(FX4BANK)
 		call FX4BANK + 2	; AFXINIT setup FX
 		call bank0
+				
+		xor a
+		ld (isOkfx),a		; NADA para PLAY
 		ret
 Selectfx					; SELECT efecto
 		call bank4
@@ -51,5 +54,8 @@ Selectfx					; SELECT efecto
 		call FX4BANK + 5	; AFXPLAY
 playSfx2
 		call bank0
+				
+		ld a,1
+		ld (isOkfx),a		; ALGO para PLAY
 		ret
 	
