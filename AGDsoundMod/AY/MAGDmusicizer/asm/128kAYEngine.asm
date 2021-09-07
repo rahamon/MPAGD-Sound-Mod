@@ -1,12 +1,11 @@
 ; Modulo para lanzar musica y efectos
 ; MUSIC AND SOUNDS
 
-MUSICSTART 	equ 51310
-FX4BANK		equ 61440 + 1024
-tBank		equ	4
+MUSICSTART 	equ 51310			; Dirección de la música
+FX4BANK		equ 61440 + 1024		; Dirección de los efectos
+tBank		equ	4			; Banco de memoria
 AGame		equ start
-IJUMP		equ IJUMPA+$FF
-;IJUMP 		equ $f8FF 				; location in memory where out jump address will be. ($nnFF<f9b6)
+IJUMP		equ IJUMPA+$FF 				; location in memory where out jump address will be. ($nnFF<f9b6)
 BASICMODE 	equ 0					; funciona desde basic
 
 			include "musicsizes.asm"
@@ -24,26 +23,22 @@ salirABasicScore:
 
 initPlayer:
 			di
-			; write ISR address to the ijunp
+			; write ISR address to the ijunp in RAM
 			call bank0
-			
 			ld hl,ISR 
 			ld (IJUMP),hl
-			;ld (IJUMP+1),hl
-
-			; bank 4
-			call bank4
 			
+			; write ISR address to the ijunp in BANK4
+			call bank4	
 			ld hl,ISR 
 			ld (IJUMP),hl 
-			;ld (IJUMP+1),hl
 			
-			ld a,31					; no music on launch. EmptySong
+			ld a,31					; clave NO MUSIC on launch. EmptySong
 			ld (ctrN),a
 			
 			; MUSIC setup
 			call bank4
-			call 49152				; init VT player
+			call 49152				; INIT VT player
 			call bank0
 			
 			;FX setup
@@ -51,18 +46,16 @@ initPlayer:
 			
 			jp gameloop
 			
-msetup:								; mover a AY.asm
+msetup:
 			di ;
-			ld a,10					; command new check ciclo+
+			ld a,10					; clave new check ciclo+
 			ld (ctrN),a
 			call bank4
 			push hl 
 			;call 49152
-			call 49152+8			; mute	
+			call 49152+8			; MUTE	
 			pop hl 
-			;ld (49153),hl	
-			;call 49152				; init
-			call 49155
+			call 49155			; POINTING TO Module
 			ret 		
 			
 			include "musicplayback.asm"
@@ -71,4 +64,3 @@ msetup:								; mover a AY.asm
 			
 ; FX and MUSIC routines
 			include "AY.asm"
-
