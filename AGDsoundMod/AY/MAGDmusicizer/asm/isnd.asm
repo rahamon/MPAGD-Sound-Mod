@@ -1,4 +1,12 @@
-; chequear sonido, comando o efecto
+; 	Chequear sonido, comando o efecto
+;	Set LoopOff with SOUND 0
+;	Set SOUND to the music you want to play eg SOUND 1 - 29.
+;	When the music starts control will then be set to 30!! This means music is playing
+;	To stop and mute the music set SOUND 31
+;	To halt (SKIP) playback SOUND 32 (note this does not mute the AY chip)
+;	Monitor con SOUND 36
+;	Fx con SOUND > 100
+
 
 		call div41
 		ld a,c				; recogemos SOUND n en registro a
