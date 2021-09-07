@@ -10,6 +10,18 @@ silenc
 		ld a,31				; no music on launch EmptySong
 		ld (ctrN),a
 		ret
+		
+; restaura player			
+msetup:
+		di ;
+		ld a,10					; clave new check ciclo+
+		ld (ctrN),a
+		call bank4
+		push hl 
+		call 49152+8			; MUTE	
+		pop hl 
+		call 49155			; POINTING TO Module
+		ret 	
 
 ; -----------------------------------------------------------------------------
 ; AY FX Routines
