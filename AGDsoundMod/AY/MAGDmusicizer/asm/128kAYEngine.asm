@@ -45,7 +45,6 @@ isOkinitSetup
 			
 			; MUSIC setup
 			call msetup
-			call bank0
 			
 			;FX setup
 			call FXsetup
