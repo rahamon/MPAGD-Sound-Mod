@@ -44,9 +44,10 @@ isOkinitSetup
 			ld (ctrN),a
 			
 			; MUSIC setup
-			call bank4
-			call 49152				; INIT VT player
-			call bank0
+			call msetup
+			;call bank4
+			;call 49152				; INIT VT player
+			;call bank0
 			
 			;FX setup
 			call FXsetup
@@ -57,17 +58,6 @@ isOkinitSetup
 			ld (isOkinitSetup),a		; todo está bien			
 endinitSetup
 			jp gameloop
-			
-msetup:
-			di ;
-			ld a,10					; clave new check ciclo+
-			ld (ctrN),a
-			call bank4
-			push hl 
-			call 49152+8			; MUTE	
-			pop hl 
-			call 49155			; POINTING TO Module
-			ret 		
 			
 			include "musicplayback.asm"
 			include	"routines.asm"
