@@ -22,7 +22,8 @@ ISR:
 ; ---------------------------------------------------------------------
 ; Seccion de musica
 ; ---------------------------------------------------------------------	
-		ld a,(ctrN)				; load a with ctrN 
+		ld a,(ctrN)				; load a with ctrN
+		; Checking
 		cp 30					; clave 30
 		jp z,contplay			; yes go to contplay	
 		cp 32					; clave 32
@@ -30,25 +31,27 @@ ISR:
 		include "irinclude.asm"	
 		; check LOOP
 		ld a,(ctrN)				; load a with ctrN
-		and a
-		jp z,loopOFF 			; check: ctrN = 0 -> command LoopOff: play una sola vez.
+		and a				; clave 0
+		jp z,loopOFF 			; yes LoopOff: play una sola vez.
+		; check MUTE
 		cp 31					; clave 31
 		jp z, muteplay 			; this stops plackback and mutes AY (no music on launch. EmptySong).
-		ld a,30					; clave 30 command PLAY
-		ld (ctrN),a
+		; todo sigue igual
+		ld a,30
+		ld (ctrN),a			; set clave 30 PLAYING
 		jp skipplay
 		
 loopOFF
-		ld a,10					; clave new check ciclo+
-		ld (ctrN),a
+		ld a,10
+		ld (ctrN),a			; set clave new check ciclo+
 		call bank4	
         ld a,1
-        ld (49152+10),a			; VTPlayerLoopFlag = 1, loopOFF.
+        ld (49152+10),a			; set VTPlayerLoopFlag = 1, loopOFF.
 		jp skipplay
 
 muteplay:
-		ld a,32					; clave skipplay
-		ld (ctrN),a
+		ld a,32
+		ld (ctrN),a				; set clave skipplay
 		call bank4
 		call 49152				; MUTE audio 
 		jp skipplay
@@ -59,12 +62,12 @@ contplay:
 		; check end of song
 		ld a,(49152+10)
 		rla
-        jr nc,skipCheckLoopFlag	; no End -> continua.
+        jr nc,skipCheckLoopFlag	; not ended -> nada más que checkear.
 		; check loopFlag
 		and a				
-		jr z,skipStop			; loopFlag = 0 -> loopON, continua.
+		jr z,skipStop			; loopFlag = 0 -> loopON, REPETIR música.
 		; Stop (end of song).
-		jp muteplay				; Stop 
+		jp muteplay				; STOP música 
 		
 skipStop		
 skipCheckLoopFlag		
