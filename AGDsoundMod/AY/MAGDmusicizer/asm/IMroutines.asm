@@ -4,8 +4,8 @@
 	
 ; interrupt routine itself 
 ISR:	
-		di              	    ; disable interrupts
-		push af     	        ; save all std regs
+		di              	    		; disable interrupts
+		push af     	       			; save all std regs
 		push bc
 		push de
 		push hl
@@ -15,9 +15,9 @@ ISR:
 		push af					;' save all std regs'
 		
 		IF BASICMODE = 0
-			ld a,(23672)		; store frames in a 
+			ld a,(23672)			; store frames in a 
 			inc a				; inc a 
-			ld (23672),a		; write back to frames 	
+			ld (23672),a			; write back to frames 	
 		ENDIF 
 ; ---------------------------------------------------------------------
 ; Seccion de musica
@@ -77,23 +77,23 @@ skipplay:
 ; ---------------------------------------------------------------------
 ; fx section		
 ; ---------------------------------------------------------------------
-		ld a,(ctrF)			; sound to play.
-		and a          	    	; any new sound?
+		ld a,(ctrF)				; sound to play.
+		and a          	    			; any new sound?
 		jr z,plfx				; no.
 		
-		call Selectfx			; SELECT FX from banck
+		call Selectfx				; SELECT FX from banck
 
 		xor a
-		ld (ctrF),a			; new ready.
+		ld (ctrF),a				; new ready.
 plfx		
-		DEFB $3E        	    ; LD A,n
-isOkfx	defb 0
+		DEFB $3E        	    		; LD A,n
+isOkfx		defb 0
 		cp 0
 		jp z,endfx
 		
 		call bank4
-		call FX4BANK + 8		; PLAY efectos de juego
-endfx	call bank0
+		call FX4BANK + 8			; PLAY efectos de juego
+endfx		call bank0
 
 		pop af 
 		ex af, af' ;'
