@@ -63,7 +63,7 @@ contplay:
 		; check end of song
 		ld a,(49152+10)
 		rla
-        	jr nc,skipCheckLoopFlag	; not ended -> nada más que checkear.
+        	jr nc,skipCheckLoopFlag			; not ended -> nada más que checkear.
 		; check loopFlag
 		and a				
 		jr z,skipStop				; loopFlag = 0 -> loopON, REPETIR música.
