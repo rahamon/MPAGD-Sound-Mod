@@ -11,9 +11,12 @@ InstallBank4:
 			;di
 			
 			; carga presentación pantalla.
+			ld b,6
+			call bankScreen
 			ld hl,screeninc
-			ld de,$4000
+			ld de,$c000
 			call zx7bin
+			call showSplash
 			
 			; extract Arkplayer pack to 49152 en bank 4
 			call bank4
