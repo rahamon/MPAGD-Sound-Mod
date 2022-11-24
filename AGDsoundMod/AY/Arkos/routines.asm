@@ -21,4 +21,18 @@ bank4:	; swap to bank 4 @ 49152 - 16k
 		ld (23388),a
 		out (c),a
 		;ei
-		ret 
+		ret
+
+showSplash
+		; Volcado de pantalla
+		di				; esperad todos un momento!
+		ld b,6			; quiero ver este banco de memoria
+		call bankScreen	; cambia a ese banco
+		ld hl,$c000		; desde origen
+		ld de,$4000		; hasta pantalla
+		ld bc,6912		; todos estos bites
+		ldir			; cópialos
+		call bank0		; mira ahora al banco 0 (el de siempre)
+		ei				; ya podeis seguir con vuestras cosas
+		ret				; gracias
+
