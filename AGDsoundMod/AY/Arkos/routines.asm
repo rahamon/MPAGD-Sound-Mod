@@ -23,6 +23,17 @@ bank4:	; swap to bank 4 @ 49152 - 16k
 		;ei
 		ret
 
+bankScreen:	; swap to bank asigned in b @ 49152 - 16k
+		;di
+		ld a,(23388)   
+		and 248
+		or b 
+		ld bc,32765
+		ld (23388),a
+		out (c),a
+		;ei
+		ret 
+
 showSplash
 		; Volcado de pantalla
 		di				; esperad todos un momento!
