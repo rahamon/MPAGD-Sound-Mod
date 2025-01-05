@@ -165,10 +165,10 @@ rem montaje
 		copy /b loader.tap + SC.tap + AG.tap %gamename%.tap
 	) else (
 		copy /b loader.tap + MUD.tap + AG.tap %gamename%128.tap
-		rem montaje clasic
+		rem montaje clasic screen
 			copy ..\Basic\loader128kclas.bas ..\assembly\
 			..\Tools\bas2tap -e -a1 -s%gamename% loader128kclas.bas loader.tap	
-			copy /b loader.tap + SC.tap + MUD.tap + AG.tap %gamename%128_clasic.tap
+			copy /b loader.tap + SC.tap + MUDC.tap + AG.tap %gamename%128_clasic.tap
 	)
 
 rem Start emulator
