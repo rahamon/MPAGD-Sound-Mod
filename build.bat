@@ -144,6 +144,9 @@ rem empacaje
 		..\tools\rasm FX4BANK.asm -o FX4BANK
 		..\tools\zx7 FX4BANK.bin
 		..\tools\Pasmo.exe --tap --name MUD bank4driver.asm MUD.tap
+		rem montaje clasic screen
+			..\tools\fart bank4driver.asm "call showSplash" ";call showSplash"
+			..\tools\Pasmo.exe --tap --name MUD bank4driver.asm MUDC.tap
 	)
 	if %modsnd% == 3 (
 		..\tools\rasm PLAY4BANK.asm -o PLAY4BANK
