@@ -682,6 +682,7 @@ cspr7  inc l               ; next cell.
        and a               ; is it empty space?
        jr nz,cspr1         ; yes, don't paint it.
        exx                 ; switch to attributes.
+       ld a,(hl)           ; get attributes.
        and SIMASK          ; remove ink.
        or c                ; put in the new ink.
        ld (hl),a           ; write back again.
